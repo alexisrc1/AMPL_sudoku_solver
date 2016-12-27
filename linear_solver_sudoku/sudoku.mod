@@ -1,0 +1,47 @@
+
+param n;
+set I:={1..n};
+var x{I,I} integer;
+
+s.t. c1 : x[1,4]=3;
+s.t. c2 : x[1,5]=1;
+s.t. c3 : x[1,6]=8;
+s.t. c4 : x[1,7]=6;
+s.t. c5 : x[2,1]=8;
+s.t. c30 : x[2,5]=9;
+s.t. c6 : x[3,1]=2;
+s.t. c7 : x[3,2]=1;
+s.t. c8 : x[3,4]=5;
+s.t. c10 : x[4,2]=7;
+s.t. c11 : x[4,3]=1;
+s.t. c12 : x[4,6]=4;
+s.t. c13 : x[4,8]=2;
+s.t. c14 : x[5,1]=6;
+s.t. c15 : x[5,9]=7;
+s.t. c17 : x[6,2]=5;
+s.t. c18 : x[6,4]=7;
+s.t. c19 : x[6,7]=1;
+s.t. c20 : x[6,8]=4;
+s.t. c21 : x[7,6]=9;
+s.t. c22 : x[7,8]=3;
+s.t. c23 : x[7,9]=1;
+s.t. c24 : x[8,5]=7;
+s.t. c25 : x[8,9]=8;
+s.t. c26 : x[9,3]=7;
+s.t. c27 : x[9,4]=1;
+s.t. c28 : x[9,5]=8;
+s.t. c29 : x[9,6]=5;
+s.t. a {i in I, j in I}: x[i,j]<=n;
+s.t. b {i in I, j in I}: x[i,j]>=1;
+s.t. ligne {i in I, j in I, k in I: j!=k}: not(x[i,j] = x[i,k]);
+s.t. colonne {j in I, i in I, k in I: i!=k}: not(x[i,j] = x[k,j]);
+s.t. carre1  {j in {1..sqrt(n)}, i in {1..sqrt(n)},k in {1..sqrt(n)}, l in {1..sqrt(n)}: i!=k && j!=l}: not(x[i,j] = x[k,l]);
+s.t. carre2  {j in {1..sqrt(n)}, i in {sqrt(n)+1..2*sqrt(n)},k in {sqrt(n)+1..2*sqrt(n)}, l in {1..sqrt(n)}: i!=k && j!=l}: not(x[i,j] = x[k,l]);
+s.t. carre3  {j in {sqrt(n)+1..2*sqrt(n)}, i in {1..sqrt(n)},k in {1..sqrt(n)}, l in {sqrt(n)+1..2*sqrt(n)}: i!=k && j!=l}: x[i,j] != x[k,l];
+s.t. carre4  {j in {sqrt(n)+1..2*sqrt(n)}, i in {sqrt(n)+1..2*sqrt(n)},k in {sqrt(n)+1..2*sqrt(n)}, l in {sqrt(n)+1..2*sqrt(n)}: i!=k && j!=l}: x[i,j] != x[k,l];
+s.t. carre5  {j in {2*sqrt(n)+1..n}, i in {2*sqrt(n)+1..n},k in {2*sqrt(n)+1..n}, l in {2*sqrt(n)+1..n}: i!=k && j!=l}: x[i,j] != x[k,l];
+s.t. carre6  {j in {2*sqrt(n)+1..n}, i in {sqrt(n)+1..2*sqrt(n)},k in {sqrt(n)+1..2*sqrt(n)}, l in {2*sqrt(n)+1..n}: i!=k && j!=l}: x[i,j] != x[k,l];
+s.t. carre7  {j in {2*sqrt(n)+1..n}, i in {1..sqrt(n)},k in {1..sqrt(n)}, l in {2*sqrt(n)+1..n}: i!=k && j!=l}: x[i,j] != x[k,l];
+s.t. carre8  {j in {sqrt(n)+1..2*sqrt(n)}, i in {2*sqrt(n)+1..n},k in {2*sqrt(n)+1..n}, l in {sqrt(n)+1..2*sqrt(n)}: i!=k && j!=l}: not(x[i,j] = x[k,l]);
+s.t. carre9  {j in {1..sqrt(n)}, i in {2*sqrt(n)+1..n},k in {2*sqrt(n)+1..n}, l in {1..sqrt(n)}: i!=k && j!=l}: x[i,j] != x[k,l];
+
